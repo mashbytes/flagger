@@ -1,0 +1,9 @@
+xcuserdata
+*.xccheckout
+*.ipa
+*.xcuserstate
+.DS_Store
+Podfile.lock
+xcshareddata
+*.dSYM.zip
+
