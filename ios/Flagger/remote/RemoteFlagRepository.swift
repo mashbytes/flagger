@@ -6,7 +6,7 @@ class RemoteFlagRepository: FlagRepository {
     private let transformer: FlagURLResponseTransformer
     private let session: URLSession
     
-    init(builder: FlagURLRequestBuilder = DefaultFlagURLRequestBuilder(url: URL(string: "https://flagger.mashbytes.co.uk")!), transformer: FlagURLResponseTransformer = StatusCodeFlagURLResponseTransformer(), session: URLSession = URLSession.shared) {
+    init(builder: FlagURLRequestBuilder = DefaultFlagURLRequestBuilder(builder: URLPathFlagURLBuilder(baseURL: URL(string: "https://flagger.mashbytes.co.uk")!)), transformer: FlagURLResponseTransformer = StatusCodeFlagURLResponseTransformer(), session: URLSession = URLSession.shared) {
         self.builder = builder
         self.transformer = transformer
         self.session = session

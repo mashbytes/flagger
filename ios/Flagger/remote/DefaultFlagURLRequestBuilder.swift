@@ -4,10 +4,6 @@ class DefaultFlagURLRequestBuilder: FlagURLRequestBuilder {
     
     private let builder: FlagURLBuilder
     
-    init(url: URL) {
-        self.builder = URLPathFlagURLBuilder(baseURL: url)
-    }
-    
     init(builder: FlagURLBuilder) {
         self.builder = builder
     }

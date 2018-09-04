@@ -7,7 +7,8 @@ class URLPathFlagURLBuilderTests: XCTestCase {
         let host = "http://www.google.co.uk"
         let builder = URLPathFlagURLBuilder(baseURL: URL(string: host)!)
         
-        guard case .success(let url) = builder.buildURL(forFlag: TestFlags.canFlyToTheMoon, usingContext: StaticContext()) else {
+        let result = builder.buildURL(forFlag: TestFlags.canFlyToTheMoon, usingContext: StaticContext())
+        guard case .success(let url) = result  else {
             XCTAssertTrue(false, "Expected success result")
             return
         }
@@ -18,7 +19,8 @@ class URLPathFlagURLBuilderTests: XCTestCase {
         let host = "http://www.google.co.uk"
         let builder = URLPathFlagURLBuilder(baseURL: URL(string: host)!)
         
-        guard case .success(let url) = builder.buildURL(forFlag: TestFlags.canFlyToTheMoon, usingContext: StaticContext(identifier: "user/123")) else {
+        let result = builder.buildURL(forFlag: TestFlags.canFlyToTheMoon, usingContext: StaticContext(identifier: "user/123"))
+        guard case .success(let url) = result else {
             XCTAssertTrue(false, "Expected success result")
             return
         }
