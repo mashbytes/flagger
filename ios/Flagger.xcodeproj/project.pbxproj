@@ -12,6 +12,7 @@
 		602357DD213EDB6000E61BF8 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DC213EDB6000E61BF8 /* FileSystem.swift */; };
 		602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */; };
 		60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D21213EDE000062D86F /* TestFileSystem.swift */; };
+		60B61D25213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */; };
 		60D9BE702137034200FE24A1 /* Flagger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D9BE662137034200FE24A1 /* Flagger.framework */; };
 		60D9BE772137034200FE24A1 /* Flagger.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D9BE692137034200FE24A1 /* Flagger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60D9BE812137037B00FE24A1 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE802137037B00FE24A1 /* Flag.swift */; };
@@ -51,6 +52,7 @@
 		602357DC213EDB6000E61BF8 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
 		602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerFileSystem.swift; sourceTree = "<group>"; };
 		60B61D21213EDE000062D86F /* TestFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFileSystem.swift; sourceTree = "<group>"; };
+		60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeFlagURLResponseTransformerTests.swift; sourceTree = "<group>"; };
 		60D9BE662137034200FE24A1 /* Flagger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flagger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D9BE692137034200FE24A1 /* Flagger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flagger.h; sourceTree = "<group>"; };
 		60D9BE6A2137034200FE24A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		60B61D23213EE7F50062D86F /* remote */ = {
+			isa = PBXGroup;
+			children = (
+				60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */,
+			);
+			path = remote;
+			sourceTree = "<group>";
+		};
 		60D9BE5C2137034200FE24A1 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +146,7 @@
 		60D9BE732137034200FE24A1 /* FlaggerTests */ = {
 			isa = PBXGroup;
 			children = (
+				60B61D23213EE7F50062D86F /* remote */,
 				60E9E33D213D448800CA3E1F /* local */,
 				60D9BE762137034200FE24A1 /* Info.plist */,
 				602357DA213ED94300E61BF8 /* TestFlags.swift */,
@@ -326,6 +337,7 @@
 				60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */,
 				602357DB213ED94300E61BF8 /* TestFlags.swift in Sources */,
 				60E9E33F213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift in Sources */,
+				60B61D25213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift in Sources */,
 				602357D9213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
