@@ -1,6 +1,6 @@
 import Foundation
 
-class DefaultRemoteFlagURLBuilder: FlagURLBuilder {
+class URLPathFlagURLBuilder: FlagURLBuilder {
     
     private let baseURL: URL
     

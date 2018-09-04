@@ -13,6 +13,7 @@
 		602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */; };
 		60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D21213EDE000062D86F /* TestFileSystem.swift */; };
 		60B61D25213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */; };
+		60B61D27213EECD50062D86F /* URLPathFlagURLBuilderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D26213EECD50062D86F /* URLPathFlagURLBuilderTests.swift */; };
 		60D9BE702137034200FE24A1 /* Flagger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D9BE662137034200FE24A1 /* Flagger.framework */; };
 		60D9BE772137034200FE24A1 /* Flagger.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D9BE692137034200FE24A1 /* Flagger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60D9BE812137037B00FE24A1 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE802137037B00FE24A1 /* Flag.swift */; };
@@ -32,7 +33,7 @@
 		60E9E336213D2AFF00CA3E1F /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E335213D2AFF00CA3E1F /* Sample.swift */; };
 		60E9E338213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E337213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift */; };
 		60E9E33A213D38C900CA3E1F /* FlagURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E339213D38C900CA3E1F /* FlagURLBuilder.swift */; };
-		60E9E33C213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E33B213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift */; };
+		60E9E33C213D392600CA3E1F /* URLPathFlagURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */; };
 		60E9E33F213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60E9E33E213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerFileSystem.swift; sourceTree = "<group>"; };
 		60B61D21213EDE000062D86F /* TestFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFileSystem.swift; sourceTree = "<group>"; };
 		60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeFlagURLResponseTransformerTests.swift; sourceTree = "<group>"; };
+		60B61D26213EECD50062D86F /* URLPathFlagURLBuilderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPathFlagURLBuilderTests.swift; sourceTree = "<group>"; };
 		60D9BE662137034200FE24A1 /* Flagger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flagger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D9BE692137034200FE24A1 /* Flagger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flagger.h; sourceTree = "<group>"; };
 		60D9BE6A2137034200FE24A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -75,7 +77,7 @@
 		60E9E335213D2AFF00CA3E1F /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		60E9E337213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultFlagURLRequestBuilder.swift; sourceTree = "<group>"; };
 		60E9E339213D38C900CA3E1F /* FlagURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagURLBuilder.swift; sourceTree = "<group>"; };
-		60E9E33B213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultRemoteFlagURLBuilder.swift; sourceTree = "<group>"; };
+		60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLPathFlagURLBuilder.swift; sourceTree = "<group>"; };
 		60E9E33E213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBackedFlagCacheRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */,
+				60B61D26213EECD50062D86F /* URLPathFlagURLBuilderTests.swift */,
 			);
 			path = remote;
 			sourceTree = "<group>";
@@ -162,7 +165,7 @@
 				60E9E32F213D205900CA3E1F /* FlagURLResponseTransformer.swift */,
 				60E9E331213D207000CA3E1F /* FlagURLRequestBuilder.swift */,
 				60E9E337213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift */,
-				60E9E33B213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift */,
+				60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */,
 			);
 			path = remote;
 			sourceTree = "<group>";
@@ -318,7 +321,7 @@
 				602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */,
 				60D9BE87213960AD00FE24A1 /* WriteableFlagRepository.swift in Sources */,
 				60D9BE832139607900FE24A1 /* FileBackedFlagCacheRepository.swift in Sources */,
-				60E9E33C213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift in Sources */,
+				60E9E33C213D392600CA3E1F /* URLPathFlagURLBuilder.swift in Sources */,
 				60D9BE952139615E00FE24A1 /* SampleFlags.swift in Sources */,
 				60D9BE912139613300FE24A1 /* RemoteFlagRepository.swift in Sources */,
 				60E9E32E213D204200CA3E1F /* StatusCodeFlagURLResponseTransformer.swift in Sources */,
@@ -334,6 +337,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B61D27213EECD50062D86F /* URLPathFlagURLBuilderTests.swift in Sources */,
 				60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */,
 				602357DB213ED94300E61BF8 /* TestFlags.swift in Sources */,
 				60E9E33F213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift in Sources */,

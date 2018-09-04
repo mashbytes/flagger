@@ -5,7 +5,7 @@ class DefaultFlagURLRequestBuilder: FlagURLRequestBuilder {
     private let builder: FlagURLBuilder
     
     init(url: URL) {
-        self.builder = DefaultRemoteFlagURLBuilder(baseURL: url)
+        self.builder = URLPathFlagURLBuilder(baseURL: url)
     }
     
     init(builder: FlagURLBuilder) {
