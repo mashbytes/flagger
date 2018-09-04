@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		602357D9213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357D8213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift */; };
+		602357DB213ED94300E61BF8 /* TestFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DA213ED94300E61BF8 /* TestFlags.swift */; };
+		602357DD213EDB6000E61BF8 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DC213EDB6000E61BF8 /* FileSystem.swift */; };
+		602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */; };
+		60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D21213EDE000062D86F /* TestFileSystem.swift */; };
 		60D9BE702137034200FE24A1 /* Flagger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D9BE662137034200FE24A1 /* Flagger.framework */; };
 		60D9BE772137034200FE24A1 /* Flagger.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D9BE692137034200FE24A1 /* Flagger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60D9BE812137037B00FE24A1 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE802137037B00FE24A1 /* Flag.swift */; };
@@ -41,6 +46,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		602357D8213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedResultFlagURLBuilder.swift; sourceTree = "<group>"; };
+		602357DA213ED94300E61BF8 /* TestFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFlags.swift; sourceTree = "<group>"; };
+		602357DC213EDB6000E61BF8 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
+		602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerFileSystem.swift; sourceTree = "<group>"; };
+		60B61D21213EDE000062D86F /* TestFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFileSystem.swift; sourceTree = "<group>"; };
 		60D9BE662137034200FE24A1 /* Flagger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Flagger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D9BE692137034200FE24A1 /* Flagger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Flagger.h; sourceTree = "<group>"; };
 		60D9BE6A2137034200FE24A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,6 +138,7 @@
 			children = (
 				60E9E33D213D448800CA3E1F /* local */,
 				60D9BE762137034200FE24A1 /* Info.plist */,
+				602357DA213ED94300E61BF8 /* TestFlags.swift */,
 			);
 			path = FlaggerTests;
 			sourceTree = "<group>";
@@ -150,6 +161,8 @@
 			children = (
 				60D9BE822139607900FE24A1 /* FileBackedFlagCacheRepository.swift */,
 				60D9BE8E2139611B00FE24A1 /* InMemoryFlagRepository.swift */,
+				602357DC213EDB6000E61BF8 /* FileSystem.swift */,
+				602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */,
 			);
 			path = local;
 			sourceTree = "<group>";
@@ -168,6 +181,8 @@
 			isa = PBXGroup;
 			children = (
 				60E9E33E213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift */,
+				602357D8213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift */,
+				60B61D21213EDE000062D86F /* TestFileSystem.swift */,
 			);
 			path = local;
 			sourceTree = "<group>";
@@ -285,9 +300,11 @@
 				60D9BE8F2139611B00FE24A1 /* InMemoryFlagRepository.swift in Sources */,
 				60D9BE932139614900FE24A1 /* SampleContexts.swift in Sources */,
 				60E9E338213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift in Sources */,
+				602357DD213EDB6000E61BF8 /* FileSystem.swift in Sources */,
 				60E9E332213D207000CA3E1F /* FlagURLRequestBuilder.swift in Sources */,
 				60E9E330213D205900CA3E1F /* FlagURLResponseTransformer.swift in Sources */,
 				60E9E33A213D38C900CA3E1F /* FlagURLBuilder.swift in Sources */,
+				602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */,
 				60D9BE87213960AD00FE24A1 /* WriteableFlagRepository.swift in Sources */,
 				60D9BE832139607900FE24A1 /* FileBackedFlagCacheRepository.swift in Sources */,
 				60E9E33C213D392600CA3E1F /* DefaultRemoteFlagURLBuilder.swift in Sources */,
@@ -306,7 +323,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */,
+				602357DB213ED94300E61BF8 /* TestFlags.swift in Sources */,
 				60E9E33F213D449700CA3E1F /* FileBackedFlagCacheRepositoryTests.swift in Sources */,
+				602357D9213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,12 +393,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -430,11 +451,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 4.0;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

@@ -16,7 +16,7 @@ extension FlagRepository {
     
 }
 
-enum Result<S, E: Error> {
+public enum Result<S, E: Error> {
     case success(S)
     case failure(E)
 }

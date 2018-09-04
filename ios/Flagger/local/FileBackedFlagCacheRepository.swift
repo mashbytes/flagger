@@ -3,12 +3,12 @@ import Foundation
 class FileBackedFlagCacheRepository: WriteableFlagRepository {
     
     private let builder: FlagURLBuilder
-    private let manager: FileManager
+    private let fileSystem: FileSystem
     private let queue: DispatchQueue
     
-    init(builder: FlagURLBuilder = DefaultFlagFileURLBuilder(), manager: FileManager = FileManager.default, queue: DispatchQueue = DispatchQueue.global(qos: .background)) {
+    init(builder: FlagURLBuilder = DefaultFlagFileURLBuilder(), fileSystem: FileSystem = FileManagerFileSystem(), queue: DispatchQueue = DispatchQueue.global(qos: .background)) {
         self.builder = builder
-        self.manager = manager
+        self.fileSystem = fileSystem
         self.queue = queue
     }
     
@@ -20,9 +20,10 @@ class FileBackedFlagCacheRepository: WriteableFlagRepository {
             case .success(let url):
                 switch status {
                 case .enabled:
-                    self.manager.createFile(atPath: url.absoluteString, contents: nil, attributes: nil)
+                    // TODO handle response
+                    _ = self.fileSystem.createFile(atURL: url)
                 case .disabled:
-                    try? self.manager.removeItem(at: url)
+                    _ = self.fileSystem.removeFile(atURL: url)
                 }
             case .failure(_):
                 break
@@ -36,7 +37,7 @@ class FileBackedFlagCacheRepository: WriteableFlagRepository {
             let result = self.builder.buildURL(forFlag: flag, usingContext: context)
             switch result {
             case .success(let url):
-                if self.manager.fileExists(atPath: url.absoluteString) {
+                if self.fileSystem.fileExists(atURL: url) {
                     callback(.success(.enabled))
                     return
                 }
