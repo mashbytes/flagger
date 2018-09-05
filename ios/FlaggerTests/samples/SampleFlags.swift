@@ -1,4 +1,5 @@
 import Foundation
+@testable import Flagger
 
 enum MessageFeatures: Flag {
     case canCompose
