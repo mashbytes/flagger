@@ -133,17 +133,14 @@
 		60D9BE682137034200FE24A1 /* Flagger */ = {
 			isa = PBXGroup;
 			children = (
-				60E9E333213D20B300CA3E1F /* local */,
-				60E9E32C213D203B00CA3E1F /* remote */,
+				60F64A80213FC18C00A909EC /* repositories */,
 				60D9BE692137034200FE24A1 /* Flagger.h */,
 				60D9BE6A2137034200FE24A1 /* Info.plist */,
 				60D9BE802137037B00FE24A1 /* Flag.swift */,
-				60D9BE842139609400FE24A1 /* FlagRepository.swift */,
-				60D9BE86213960AD00FE24A1 /* WriteableFlagRepository.swift */,
 				60D9BE88213960D800FE24A1 /* Context.swift */,
 				60D9BE8A213960F200FE24A1 /* StaticContext.swift */,
-				60D9BE8C2139610A00FE24A1 /* DefaultFlagRepository.swift */,
 				60E9E339213D38C900CA3E1F /* FlagURLBuilder.swift */,
+				60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */,
 			);
 			path = Flagger;
 			sourceTree = "<group>";
@@ -164,16 +161,13 @@
 			isa = PBXGroup;
 			children = (
 				60D9BE902139613300FE24A1 /* RemoteFlagRepository.swift */,
-				60E9E32D213D204200CA3E1F /* StatusCodeFlagURLResponseTransformer.swift */,
-				60E9E32F213D205900CA3E1F /* FlagURLResponseTransformer.swift */,
-				60E9E331213D207000CA3E1F /* FlagURLRequestBuilder.swift */,
-				60E9E337213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift */,
-				60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */,
+				60F64A82213FC1ED00A909EC /* response */,
+				60F64A81213FC1E500A909EC /* request */,
 			);
 			path = remote;
 			sourceTree = "<group>";
 		};
-		60E9E333213D20B300CA3E1F /* local */ = {
+		60E9E333213D20B300CA3E1F /* cache */ = {
 			isa = PBXGroup;
 			children = (
 				60D9BE822139607900FE24A1 /* FileBackedFlagCacheRepository.swift */,
@@ -181,7 +175,7 @@
 				602357DC213EDB6000E61BF8 /* FileSystem.swift */,
 				602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */,
 			);
-			path = local;
+			path = cache;
 			sourceTree = "<group>";
 		};
 		60E9E334213D20CA00CA3E1F /* samples */ = {
@@ -202,6 +196,36 @@
 				60B61D21213EDE000062D86F /* TestFileSystem.swift */,
 			);
 			path = local;
+			sourceTree = "<group>";
+		};
+		60F64A80213FC18C00A909EC /* repositories */ = {
+			isa = PBXGroup;
+			children = (
+				60D9BE842139609400FE24A1 /* FlagRepository.swift */,
+				60D9BE86213960AD00FE24A1 /* WriteableFlagRepository.swift */,
+				60D9BE8C2139610A00FE24A1 /* DefaultFlagRepository.swift */,
+				60E9E333213D20B300CA3E1F /* cache */,
+				60E9E32C213D203B00CA3E1F /* remote */,
+			);
+			path = repositories;
+			sourceTree = "<group>";
+		};
+		60F64A81213FC1E500A909EC /* request */ = {
+			isa = PBXGroup;
+			children = (
+				60E9E337213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift */,
+				60E9E331213D207000CA3E1F /* FlagURLRequestBuilder.swift */,
+			);
+			path = request;
+			sourceTree = "<group>";
+		};
+		60F64A82213FC1ED00A909EC /* response */ = {
+			isa = PBXGroup;
+			children = (
+				60E9E32F213D205900CA3E1F /* FlagURLResponseTransformer.swift */,
+				60E9E32D213D204200CA3E1F /* StatusCodeFlagURLResponseTransformer.swift */,
+			);
+			path = response;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
