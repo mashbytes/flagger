@@ -1,36 +1,35 @@
 import Foundation
 
-class RemoteFlagRepository: FlagRepository {
-    
-    private let builder: FlagURLRequestBuilder
-    private let transformer: FlagURLResponseTransformer
+class RemoteFlagRepository<F: Flag, S: FlagStatus>: ReadableFlagRepository {
+
+    private let requestBuilder: AnyFlagURLRequestBuilder<F>
+    private let responseTransformer: AnyFlagURLResponseTransformer<S>
     private let session: URLSession
     
-    init(builder: FlagURLRequestBuilder = DefaultFlagURLRequestBuilder(builder: URLPathFlagURLBuilder(baseURL: URL(string: "https://flagger.mashbytes.co.uk")!)), transformer: FlagURLResponseTransformer = StatusCodeFlagURLResponseTransformer(), session: URLSession = URLSession.shared) {
-        self.builder = builder
-        self.transformer = transformer
+    init<B: FlagURLRequestBuilder, T: FlagURLResponseTransformer>(requestBuilder: B, responseTransformer: T, session: URLSession = URLSession.shared) where F == B.FlagType, S == T.FlagStatusType {
+        self.requestBuilder = AnyFlagURLRequestBuilder(requestBuilder)
+        self.responseTransformer = AnyFlagURLResponseTransformer(responseTransformer)
         self.session = session
     }
     
-    func readStatus<F: Flag>(ofFlag flag: F, forContext context: Context, callback: @escaping FlagCallback) {
-        let result = builder.buildURLRequest(forFlag: flag, usingContext: context)
+    func readStatus(ofFlag flag: F, callback: ReadCallback<S>?) {
+        let result = requestBuilder.buildURLRequest(forFlag: flag)
         switch result {
         case .success(let request):
             let task = session.dataTask(with: request) { [weak self] data, response, error in
                 guard let `self` = self else {
                     return
                 }
-                let result = self.transformer.transform(data: data, response: response, error: error, forFlag: flag)
+                let result = self.responseTransformer.transform(data: data, response: response, error: error)
                 switch result {
-                case .success(let status): callback(.success(status))
-                case .failure(let error): callback(.failure(.other(error)))
+                case .success(let status): callback?(.success(status))
+                case .failure(let error): callback?(.failure(.other(error)))
                 }
             }
             task.resume()
         case .failure(let error):
-            callback(.failure(RepositoryError.other(error)))
+            callback?(.failure(RepositoryError.other(error)))
         }
     }
-    
     
 }

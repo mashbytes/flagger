@@ -1,26 +1,36 @@
 import Foundation
 
-class InMemoryFlagRepository: WriteableFlagRepository {
+class InMemoryFlagRepository<F: Flag & Identifiable, S: FlagStatus & Codable>: FlagRepository {
     
-    private var flags = Set<String>()
+    private var flags: [String: Data] = [:]
     
-    func readStatus<F: Flag>(ofFlag flag: F, forContext context: Context, callback: @escaping FlagCallback) {
-        let key =  compositeIdentifier(ofFlag: flag, forContext: context)
-        if flags.contains(key) {
-            callback(.success(.enabled))
+    func readStatus(ofFlag flag: F, callback: ReadCallback<S>?) {
+        guard let data = flags[flag.identifier] else {
+            callback?(.failure(.flagNotFound))
             return
         }
-        callback(.success(.disabled))
+        let decoder = JSONDecoder()
+        
+        do {
+            let decoded = try decoder.decode(S.self, from: data)
+            callback?(.success(decoded))
+        } catch {
+            callback?(.failure(.other(error)))
+        }
     }
     
-    func writeStatus<F: Flag>(_ status: FlagStatus, ofFlag flag: F, forContext context: Context) {
-        let key =  compositeIdentifier(ofFlag: flag, forContext: context)
-        flags.insert(key)
+    func writeStatus(_ status: S, ofFlag flag: F, callback: WriteCallback<S>?) {
+        let encoder = JSONEncoder()
+        
+        do {
+            let encoded = try encoder.encode(status)
+            flags[flag.identifier] = encoded
+            callback?(.success(status))
+        } catch  {
+            callback?(.failure(.other(error)))
+        }
     }
     
-    private func compositeIdentifier(ofFlag flag: Flag, forContext context: Context) -> String {
-        return "\(context.identifier)-\(flag.identifier)"
-    }
     
 }
 

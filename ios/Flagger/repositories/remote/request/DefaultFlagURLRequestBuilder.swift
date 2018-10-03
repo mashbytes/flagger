@@ -1,15 +1,15 @@
 import Foundation
 
-class DefaultFlagURLRequestBuilder: FlagURLRequestBuilder {
+class DefaultFlagURLRequestBuilder<F: Flag>: FlagURLRequestBuilder {
     
-    private let builder: FlagURLBuilder
+    private let builder: AnyFlagURLBuilder<F>
     
-    init(builder: FlagURLBuilder) {
-        self.builder = builder
+    init<B: FlagURLBuilder>(builder: B) where B.FlagType == F {
+        self.builder = AnyFlagURLBuilder(builder)
     }
     
-    func buildURLRequest<F>(forFlag flag: F, usingContext context: Context) -> Result<URLRequest, FlagURLRequestBuilderError> where F : Flag {
-        let result = builder.buildURL(forFlag: flag, usingContext: context)
+    func buildURLRequest(forFlag flag: F) -> Result<URLRequest, FlagURLRequestBuilderError> {
+        let result = builder.buildURL(forFlag: flag)
         
         switch result {
         case .success(let url): return .success(URLRequest(url: url))

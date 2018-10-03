@@ -1,6 +1,7 @@
 import Foundation
 
-class FileBackedFlagCacheRepository: WriteableFlagRepository {
+class FileBackedFlagCacheRepository: FlagRepository {
+    typealias FlagType = (Flag & Codable)
     
     private let builder: FlagURLBuilder
     private let fileSystem: FileSystem
@@ -10,6 +11,10 @@ class FileBackedFlagCacheRepository: WriteableFlagRepository {
         self.builder = builder
         self.fileSystem = fileSystem
         self.queue = queue
+    }
+    
+    func writeStatus(_ status: FileBackedFlagCacheRepository.FlagStatusType, ofFlag flag: FileBackedFlagCacheRepository.FlagType, callback: (Result<FileBackedFlagCacheRepository.FlagStatusType, RepositoryError>) -> ()) {
+        <#code#>
     }
     
     func writeStatus<F>(_ status: FlagStatus, ofFlag flag: F, forContext context: Context) where F : Flag {
