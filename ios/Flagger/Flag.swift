@@ -22,3 +22,10 @@ protocol Toggleable {
     
     var toggle: Toggle { get }
 }
+
+protocol HTTPStatusCodeDecodable {
+    
+    init(from code: Int)
+    
+}
+

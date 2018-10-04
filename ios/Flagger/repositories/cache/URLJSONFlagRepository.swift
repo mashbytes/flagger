@@ -14,38 +14,37 @@ class URLJSONFlagRepository<F: Flag, S: FlagStatus & Codable>: FlagRepository {
     
     func writeStatus(_ status: S, ofFlag flag: F, callback: WriteCallback<S>?) {
         queue.async {
-            
-            let result = self.builder.buildURL(forFlag: flag)
-            switch result {
-            case .success(let url):
-                do {
-                    let encoded = try self.encoder.encode(status)
-                    try encoded.write(to: url)
-                    callback?(.success(status))
-                } catch {
-                    callback?(.failure(.other(error)))
-                }
-            case .failure(let error):
-                callback?(.failure(.other(error)))
+            let result = self.buildURL(forFlag: flag) { url in
+                let encoded = try self.encoder.encode(status)
+                try encoded.write(to: url)
+                return .success(status)
             }
+            callback?(result)
         }
     }
     
     func readStatus(ofFlag flag: F, callback: ReadCallback<S>?) {
         queue.async {
-            let result = self.builder.buildURL(forFlag: flag)
-            switch result {
-            case .success(let url):
-                do {
-                    let data = try Data(contentsOf: url)
-                    let status = try self.decoder.decode(S.self, from: data)
-                    callback?(.success(status))
-                } catch {
-                    callback?(.failure(.other(error)))
-                }
-            case .failure(let error):
-                callback?(.failure(.other(error)))
+            let result = self.buildURL(forFlag: flag) { url in
+                let data = try Data(contentsOf: url)
+                let status = try self.decoder.decode(S.self, from: data)
+                return .success(status)
             }
+            callback?(result)
+        }
+    }
+    
+    private func buildURL(forFlag flag: F, onSuccess: (URL) throws -> Result<S, RepositoryError>) -> Result<S, RepositoryError> {
+        let result = builder.buildURL(forFlag: flag)
+        switch result {
+        case .success(let url):
+            do {
+                return try onSuccess(url)
+            } catch {
+                return .failure(.other(error))
+            }
+        case .failure(let error):
+            return .failure(.other(error))
         }
     }
     

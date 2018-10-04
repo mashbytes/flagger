@@ -3,142 +3,71 @@ import XCTest
 
 class FileBackedFlagCacheRepositoryTests: XCTestCase {
     
-    func testShouldCreateFileForEnabledStatus() {
+    func testShouldReturnSuccessResultWhenWritingOnSucceeds() {
         let flag = TestFlags.canDiveToTheBottomOfTheOcean
         let directory = directoryForFlag(flag)
-        let builder = FixedResultFlagURLBuilder()
+        let builder = FixedResultFlagURLBuilder<TestFlags>()
         builder.addResult(.success(directory), forFlag: flag)
         
-        let fileSystem = TestFileSystem()
+        let cache = URLJSONFlagRepository<TestFlags, OnOffFlagStatus>(builder: builder)
+        let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
+        cache.writeStatus(.on, ofFlag: flag) { result in
+            callbackExpectation.fulfill()
+            guard case .success(let status) = result else {
+                XCTAssertTrue(false, "Expected success result")
+                return
+            }
+            XCTAssertEqual(status, .on)
+        }
         
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: fileSystem)
-        cache.writeStatus(.enabled, ofFlag: flag)
-        
-        wait(for: [fileSystem.createExpectation], timeout: 1)
-        XCTAssertNotNil(fileSystem.createdURL)
-        XCTAssertEqual(fileSystem.createdURL!, directory)
+        wait(for: [callbackExpectation], timeout: 1)
     }
     
-    func testShouldDeleteFileForDisabledStatus() {
+    func testShouldReturnSuccessResultWhenWritingOffSucceeds() {
         let flag = TestFlags.canDiveToTheBottomOfTheOcean
         let directory = directoryForFlag(flag)
         
-        let builder = FixedResultFlagURLBuilder()
+        let builder = FixedResultFlagURLBuilder<TestFlags>()
         builder.addResult(.success(directory), forFlag: flag)
         
-        let fileSystem = TestFileSystem()
-        
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: fileSystem)
-        cache.writeStatus(.disabled, ofFlag: flag)
-        
-        wait(for: [fileSystem.removeExpectation], timeout: 1)
-        XCTAssertNotNil(fileSystem.removedURL)
-        XCTAssertEqual(fileSystem.removedURL!, directory)
-    }
-    
-    func testShouldNotInteractWithFileSystemWhenURLBuilderFails() {
-        let flag = TestFlags.canDiveToTheBottomOfTheOcean
-        
-        let builder = FixedResultFlagURLBuilder()
-        builder.addResult(.failure(FlagURLBuilderError.buildFailed), forFlag: flag)
+        let cache = URLJSONFlagRepository<TestFlags, OnOffFlagStatus>(builder: builder)
 
-        let fileSystem = TestFileSystem()
+        let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
 
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: fileSystem)
-        cache.writeStatus(.enabled, ofFlag: flag)
-        cache.writeStatus(.disabled, ofFlag: flag)
+        cache.writeStatus(.off, ofFlag: flag) { result in
+            callbackExpectation.fulfill()
+            guard case .success(let status) = result else {
+                XCTAssertTrue(false, "Expected success result")
+                return
+            }
+            XCTAssertEqual(status, .off)
+        }
         
-        XCTAssertNil(fileSystem.createdURL)
-        XCTAssertNil(fileSystem.removedURL)
-        XCTAssertNil(fileSystem.existsURL)
+        wait(for: [callbackExpectation], timeout: 1)
     }
     
     func testFailureResultIsReturnedWhenBuilderCannotCreateURL() {
         let flag = TestFlags.canDiveToTheBottomOfTheOcean
         
-        let builder = FixedResultFlagURLBuilder()
+        let builder = FixedResultFlagURLBuilder<TestFlags>()
         builder.addResult(.failure(FlagURLBuilderError.buildFailed), forFlag: flag)
 
-        let callbackExpectation = XCTestExpectation(description: "Callback")
-        var callbackResult: Result<FlagStatus, RepositoryError>?
-
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: TestFileSystem())
-        cache.readStatus(ofFlag: flag) { result in
-            callbackResult = result
-            callbackExpectation.fulfill()
-        }
-
-        wait(for: [callbackExpectation], timeout: 1)
-        XCTAssertNotNil(callbackResult)
-
-        switch callbackResult! {
-        case .failure:
-            break
-        default:
-            XCTAssertFalse(true)
-        }
-    }
-    
-    func testStatusIsDisabledWhenDirectoryDoesNotExist() {
-        let flag = TestFlags.canFlyToTheMoon
-        let directory = directoryForFlag(flag)
-
-        let builder = FixedResultFlagURLBuilder()
-        builder.addResult(.success(directory), forFlag: flag)
+        let cache = URLJSONFlagRepository<TestFlags, OnOffFlagStatus>(builder: builder)
         
-        let fileSystem = TestFileSystem()
-        fileSystem.exists = false
-
-        let callbackExpectation = XCTestExpectation(description: "Callback")
-        var callbackResult: Result<FlagStatus, RepositoryError>?
+        let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
         
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: fileSystem)
-        cache.readStatus(ofFlag: flag) { result in
-            callbackResult = result
+        cache.writeStatus(.on, ofFlag: flag) { result in
             callbackExpectation.fulfill()
+            guard case .failure = result else {
+                XCTAssertTrue(false, "Expected failure result")
+                return
+            }
         }
         
         wait(for: [callbackExpectation], timeout: 1)
-        XCTAssertNotNil(callbackResult)
-        
-        switch callbackResult! {
-        case .success(let status):
-            XCTAssertEqual(.disabled, status)
-        default:
-            XCTAssertFalse(true)
-        }
     }
     
-    func testStatusIsEnabledWhenDirectoryDoesExist() {
-        let flag = TestFlags.canFlyToTheMoon
-        let directory = directoryForFlag(flag)
-        
-        let builder = FixedResultFlagURLBuilder()
-        builder.addResult(.success(directory), forFlag: flag)
-        
-        let fileSystem = TestFileSystem()
-        
-        let callbackExpectation = XCTestExpectation(description: "Callback")
-        var callbackResult: Result<FlagStatus, RepositoryError>?
-        
-        let cache = FileBackedFlagCacheRepository(builder: builder, fileSystem: fileSystem)
-        cache.readStatus(ofFlag: flag) { result in
-            callbackResult = result
-            callbackExpectation.fulfill()
-        }
-        
-        wait(for: [callbackExpectation], timeout: 1)
-        XCTAssertNotNil(callbackResult)
-        
-        switch callbackResult! {
-        case .success(let status):
-            XCTAssertEqual(.enabled, status)
-        default:
-            XCTAssertFalse(true)
-        }
-    }
-    
-    private func directoryForFlag(_ flag: Flag) -> URL {
+    private func directoryForFlag(_ flag: Identifiable) -> URL {
         return URL(string: "/")!.appendingPathComponent("\(type(of: self))").appendingPathComponent(flag.identifier)
     }
     

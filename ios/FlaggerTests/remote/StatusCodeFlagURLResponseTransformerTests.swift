@@ -4,11 +4,11 @@ import XCTest
 class StatusCodeFlagURLResponseTransformerTests: XCTestCase {
     
     private let url = URL(string: "http://www.google.co.uk")!
-    private let transformer = StatusCodeFlagURLResponseTransformer()
+    private let transformer = StatusCodeFlagURLResponseTransformer<OnOffFlagStatus>()
     
     func testReturnsFailureIfStatusCodeIsNotPresent() {
         let response = URLResponse(url: url, mimeType: nil, expectedContentLength: 0, textEncodingName: nil)
-        let result = transformer.transform(data: nil, response: response, error: nil, forFlag: TestFlags.canDrive)
+        let result = transformer.transform(data: nil, response: response, error: nil)
         
         guard case .failure(.unexpectedResponse) = result else {
             XCTAssertTrue(false, "Expected failure result")
@@ -16,11 +16,11 @@ class StatusCodeFlagURLResponseTransformerTests: XCTestCase {
         }
     }
     
-    func testReturnsFailureIfNotExpectedStatusCode() {
+    func testReturnsFailureIfError() {
         let response = HTTPURLResponse(url: url, statusCode: 500, httpVersion: nil, headerFields: nil)
-        let result = transformer.transform(data: nil, response: response, error: nil, forFlag: TestFlags.canDrive)
+        let result = transformer.transform(data: nil, response: response, error: FlagURLResponseTransformerError.unexpectedResponse)
         
-        guard case .failure(.unexpectedResponse) = result else {
+        guard case .failure = result else {
             XCTAssertTrue(false, "Expected failure result")
             return
         }
@@ -28,9 +28,9 @@ class StatusCodeFlagURLResponseTransformerTests: XCTestCase {
     
     func testReturnsEnabledFor200Response() {
         let response = HTTPURLResponse(url: url, statusCode: 200, httpVersion: nil, headerFields: nil)
-        let result = transformer.transform(data: nil, response: response, error: nil, forFlag: TestFlags.canDrive)
+        let result = transformer.transform(data: nil, response: response, error: nil)
         
-        guard case .success(.enabled) = result else {
+        guard case .success(.on) = result else {
             XCTAssertTrue(false, "Expected success result")
             return
         }
@@ -38,13 +38,23 @@ class StatusCodeFlagURLResponseTransformerTests: XCTestCase {
     
     func testReturnsDisabledFor404Response() {
         let response = HTTPURLResponse(url: url, statusCode: 404, httpVersion: nil, headerFields: nil)
-        let result = transformer.transform(data: nil, response: response, error: nil, forFlag: TestFlags.canDrive)
+        let result = transformer.transform(data: nil, response: response, error: nil)
         
-        guard case .success(.disabled) = result else {
+        guard case .success(.off) = result else {
             XCTAssertTrue(false, "Expected success result")
             return
         }
     }
 
     
+}
+
+extension OnOffFlagStatus: HTTPStatusCodeDecodable {
+    
+    public init(from code: Int) {
+        switch code {
+        case 200: self = .on
+        default: self = .off
+        }
+    }
 }
