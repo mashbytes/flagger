@@ -29,3 +29,10 @@ protocol HTTPStatusCodeDecodable {
     
 }
 
+extension Flag {
+    
+    func getStatus<R: ReadableFlagRepository, S>(usingRepository repository: R, callback: @escaping (Result<S, RepositoryError>) -> ()) where R.FlagType == Self, R.FlagStatusType == S {
+        repository.readStatus(ofFlag: self, callback: callback)
+    }
+    
+}
