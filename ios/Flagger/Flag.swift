@@ -2,20 +2,28 @@ import Foundation
 
 protocol Flag {
     
+}
+
+protocol FlagStatus {
+    
+}
+
+protocol Identifiable {
+    
     var identifier: String { get }
     
-    func getStatus(usingRepository repository: FlagRepository, inContext context: Context, callback: @escaping FlagCallback)
+}
+
+protocol HTTPStatusCodeDecodable {
+    
+    init(from code: Int)
     
 }
 
 extension Flag {
     
-    func getStatus(usingRepository repository: FlagRepository = DefaultFlagRepository(), inContext context: Context = StaticContext(), callback: @escaping FlagCallback) {
-        repository.readStatus(ofFlag: self, forContext: context, callback: callback)
+    func getStatus<R: ReadableFlagRepository, S>(usingRepository repository: R, callback: @escaping (Result<S, RepositoryError>) -> ()) where R.FlagType == Self, R.FlagStatusType == S {
+        repository.readStatus(ofFlag: self, callback: callback)
     }
-}
-
-enum FlagStatus {
-    case enabled
-    case disabled
+    
 }

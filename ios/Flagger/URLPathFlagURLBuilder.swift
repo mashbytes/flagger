@@ -1,6 +1,6 @@
 import Foundation
 
-class URLPathFlagURLBuilder: FlagURLBuilder {
+class URLPathFlagURLBuilder<F: Flag & Identifiable>: FlagURLBuilder {
     
     private let baseURL: URL
     
@@ -8,10 +8,8 @@ class URLPathFlagURLBuilder: FlagURLBuilder {
         self.baseURL = baseURL
     }
     
-    func buildURL<F>(forFlag flag: F, usingContext context: Context) -> Result<URL, FlagURLBuilderError> where F : Flag {
-        return .success(baseURL.appendingPathComponent(context.identifier).appendingPathComponent(flag.identifier))
+    func buildURL(forFlag flag: F) -> Result<URL, FlagURLBuilderError> {
+        return .success(baseURL.appendingPathComponent(flag.identifier))
     }
-    
-    
     
 }

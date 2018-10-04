@@ -1,8 +1,9 @@
 import Foundation
 
 protocol FlagURLBuilder {
+    associatedtype FlagType: Flag
     
-    func buildURL<F: Flag>(forFlag flag: F, usingContext context: Context) -> Result<URL, FlagURLBuilderError>
+    func buildURL(forFlag flag: FlagType) -> Result<URL, FlagURLBuilderError>
     
 }
 
@@ -13,3 +14,16 @@ enum FlagURLBuilderError: Error {
     
 }
 
+struct AnyFlagURLBuilder<TargetFlagType: Flag>: FlagURLBuilder {
+    
+    private let buildFn: (TargetFlagType) -> Result<URL, FlagURLBuilderError>
+    
+    init<B: FlagURLBuilder>(_ builder: B) where B.FlagType == TargetFlagType {
+        buildFn = builder.buildURL
+    }
+    
+    func buildURL(forFlag flag: TargetFlagType) -> Result<URL, FlagURLBuilderError> {
+        return buildFn(flag)
+    }
+    
+}

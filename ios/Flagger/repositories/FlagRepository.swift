@@ -1,19 +1,28 @@
 import Foundation
 
-typealias FlagCallback = (Result<FlagStatus, RepositoryError>) -> ()
 
-protocol FlagRepository {
-    
-    func readStatus<F: Flag>(ofFlag flag: F, forContext context: Context, callback: @escaping FlagCallback)
+protocol FlagRepository: ReadableFlagRepository, WriteableFlagRepository {
     
 }
 
-extension FlagRepository {
+struct AnyFlagRepository<TargetFlagType: Flag, TargetFlagStatusType: FlagStatus>: FlagRepository {
     
-    func readStatus<F: Flag>(ofFlag flag: F, callback: @escaping FlagCallback) {
-        return readStatus(ofFlag: flag, forContext: StaticContext(), callback: callback)
+    private let writeRepository: AnyWriteableFlagRepository<TargetFlagType,TargetFlagStatusType>
+    private let readRepository: AnyReadableFlagRepository<TargetFlagType,TargetFlagStatusType>
+    
+    init<R: FlagRepository>(_ repository: R) where R.FlagStatusType == TargetFlagStatusType, R.FlagType == TargetFlagType {
+        writeRepository = AnyWriteableFlagRepository(repository)
+        readRepository = AnyReadableFlagRepository(repository)
+    }
+
+    func writeStatus(_ status: TargetFlagStatusType, ofFlag flag: TargetFlagType, callback: WriteCallback<TargetFlagStatusType>?) {
+        writeRepository.writeStatus(status, ofFlag: flag, callback: callback)
     }
     
+    func readStatus(ofFlag flag: TargetFlagType, callback: ReadCallback<TargetFlagStatusType>?) {
+        readRepository.readStatus(ofFlag: flag, callback: callback)
+    }
+
 }
 
 public enum Result<S, E: Error> {
@@ -23,6 +32,7 @@ public enum Result<S, E: Error> {
 
 enum RepositoryError: Error {
     
+    case flagNotFound
     case other(Error)
 
 }

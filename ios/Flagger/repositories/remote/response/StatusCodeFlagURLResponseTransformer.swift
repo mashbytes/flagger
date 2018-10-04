@@ -1,16 +1,17 @@
 import Foundation
 
-class StatusCodeFlagURLResponseTransformer: FlagURLResponseTransformer {
+class StatusCodeFlagURLResponseTransformer<S: FlagStatus & HTTPStatusCodeDecodable>: FlagURLResponseTransformer {
     
-    func transform<F>(data: Data?, response: URLResponse?, error: Error?, forFlag flag: F) -> Result<FlagStatus, FlagURLResponseTransformerError> where F : Flag {
+    func transform(data: Data?, response: URLResponse?, error: Error?) -> Result<S, FlagURLResponseTransformerError> {
         guard let httpResponse = response as? HTTPURLResponse else {
             return .failure(.unexpectedResponse)
         }
-        switch httpResponse.statusCode {
-        case 200: return .success(.enabled)
-        case 404: return .success(.disabled)
-        default: return .failure(.unexpectedResponse)
+        if let error = error {
+            return .failure(.other(error))
         }
+        let code = httpResponse.statusCode
+        let status = S(from: code)
+        return .success(status)
     }
     
 }
