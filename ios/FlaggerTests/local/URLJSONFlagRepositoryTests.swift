@@ -1,23 +1,31 @@
 import XCTest
 @testable import Flagger
 
-class FileBackedFlagCacheRepositoryTests: XCTestCase {
+class URLJSONFlagRepositoryTests: XCTestCase {
+    
+    override func setUp() {
+        super.setUp()
+        try? FileManager.default.removeItem(at: temporaryDirectory)
+        try? FileManager.default.createDirectory(at: temporaryDirectory, withIntermediateDirectories: true, attributes: nil)
+
+    }
     
     func testShouldReturnSuccessResultWhenWritingOnSucceeds() {
         let flag = TestFlags.canDiveToTheBottomOfTheOcean
         let directory = directoryForFlag(flag)
+        
         let builder = FixedResultFlagURLBuilder<TestFlags>()
         builder.addResult(.success(directory), forFlag: flag)
         
         let cache = URLJSONFlagRepository<TestFlags, OnOffFlagStatus>(builder: builder)
         let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
         cache.writeStatus(.on, ofFlag: flag) { result in
-            callbackExpectation.fulfill()
             guard case .success(let status) = result else {
                 XCTAssertTrue(false, "Expected success result")
                 return
             }
             XCTAssertEqual(status, .on)
+            callbackExpectation.fulfill()
         }
         
         wait(for: [callbackExpectation], timeout: 1)
@@ -35,12 +43,12 @@ class FileBackedFlagCacheRepositoryTests: XCTestCase {
         let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
 
         cache.writeStatus(.off, ofFlag: flag) { result in
-            callbackExpectation.fulfill()
             guard case .success(let status) = result else {
                 XCTAssertTrue(false, "Expected success result")
                 return
             }
             XCTAssertEqual(status, .off)
+            callbackExpectation.fulfill()
         }
         
         wait(for: [callbackExpectation], timeout: 1)
@@ -57,19 +65,22 @@ class FileBackedFlagCacheRepositoryTests: XCTestCase {
         let callbackExpectation = XCTestExpectation(description: "Expected callback with result")
         
         cache.writeStatus(.on, ofFlag: flag) { result in
-            callbackExpectation.fulfill()
             guard case .failure = result else {
                 XCTAssertTrue(false, "Expected failure result")
                 return
             }
+            callbackExpectation.fulfill()
         }
         
         wait(for: [callbackExpectation], timeout: 1)
     }
     
     private func directoryForFlag(_ flag: Identifiable) -> URL {
-        return URL(string: "/")!.appendingPathComponent("\(type(of: self))").appendingPathComponent(flag.identifier)
+        return temporaryDirectory.appendingPathComponent(flag.identifier)
     }
     
+    private var temporaryDirectory: URL {
+        return URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("\(type(of: self))")
+    }
     
 }
