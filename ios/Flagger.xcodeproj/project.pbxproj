@@ -9,8 +9,7 @@
 /* Begin PBXBuildFile section */
 		602357D9213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357D8213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift */; };
 		602357DB213ED94300E61BF8 /* TestFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DA213ED94300E61BF8 /* TestFlags.swift */; };
-		602357DD213EDB6000E61BF8 /* FileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DC213EDB6000E61BF8 /* FileSystem.swift */; };
-		602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */; };
+		604D55262165561E00BD4058 /* Coding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 604D55252165561E00BD4058 /* Coding.swift */; };
 		60B3CCE221635CBD00524BE4 /* ReadableFlagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B3CCE121635CBD00524BE4 /* ReadableFlagRepository.swift */; };
 		60B61D22213EDE000062D86F /* TestFileSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D21213EDE000062D86F /* TestFileSystem.swift */; };
 		60B61D25213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */; };
@@ -20,7 +19,7 @@
 		60D9BE702137034200FE24A1 /* Flagger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60D9BE662137034200FE24A1 /* Flagger.framework */; };
 		60D9BE772137034200FE24A1 /* Flagger.h in Headers */ = {isa = PBXBuildFile; fileRef = 60D9BE692137034200FE24A1 /* Flagger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		60D9BE812137037B00FE24A1 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE802137037B00FE24A1 /* Flag.swift */; };
-		60D9BE832139607900FE24A1 /* FileBackedFlagCacheRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE822139607900FE24A1 /* FileBackedFlagCacheRepository.swift */; };
+		60D9BE832139607900FE24A1 /* URLJSONFlagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE822139607900FE24A1 /* URLJSONFlagRepository.swift */; };
 		60D9BE852139609400FE24A1 /* FlagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE842139609400FE24A1 /* FlagRepository.swift */; };
 		60D9BE87213960AD00FE24A1 /* WriteableFlagRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE86213960AD00FE24A1 /* WriteableFlagRepository.swift */; };
 		60D9BE89213960D800FE24A1 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60D9BE88213960D800FE24A1 /* Context.swift */; };
@@ -53,8 +52,7 @@
 /* Begin PBXFileReference section */
 		602357D8213ED6B800E61BF8 /* FixedResultFlagURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FixedResultFlagURLBuilder.swift; sourceTree = "<group>"; };
 		602357DA213ED94300E61BF8 /* TestFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFlags.swift; sourceTree = "<group>"; };
-		602357DC213EDB6000E61BF8 /* FileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileSystem.swift; sourceTree = "<group>"; };
-		602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManagerFileSystem.swift; sourceTree = "<group>"; };
+		604D55252165561E00BD4058 /* Coding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coding.swift; sourceTree = "<group>"; };
 		60B3CCE121635CBD00524BE4 /* ReadableFlagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadableFlagRepository.swift; sourceTree = "<group>"; };
 		60B61D21213EDE000062D86F /* TestFileSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFileSystem.swift; sourceTree = "<group>"; };
 		60B61D24213EE8000062D86F /* StatusCodeFlagURLResponseTransformerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusCodeFlagURLResponseTransformerTests.swift; sourceTree = "<group>"; };
@@ -67,7 +65,7 @@
 		60D9BE6F2137034200FE24A1 /* FlaggerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlaggerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		60D9BE762137034200FE24A1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		60D9BE802137037B00FE24A1 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
-		60D9BE822139607900FE24A1 /* FileBackedFlagCacheRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileBackedFlagCacheRepository.swift; sourceTree = "<group>"; };
+		60D9BE822139607900FE24A1 /* URLJSONFlagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLJSONFlagRepository.swift; sourceTree = "<group>"; };
 		60D9BE842139609400FE24A1 /* FlagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlagRepository.swift; sourceTree = "<group>"; };
 		60D9BE86213960AD00FE24A1 /* WriteableFlagRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteableFlagRepository.swift; sourceTree = "<group>"; };
 		60D9BE88213960D800FE24A1 /* Context.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
@@ -145,6 +143,7 @@
 				60D9BE8A213960F200FE24A1 /* StaticContext.swift */,
 				60E9E339213D38C900CA3E1F /* FlagURLBuilder.swift */,
 				60E9E33B213D392600CA3E1F /* URLPathFlagURLBuilder.swift */,
+				604D55252165561E00BD4058 /* Coding.swift */,
 			);
 			path = Flagger;
 			sourceTree = "<group>";
@@ -174,10 +173,8 @@
 		60E9E333213D20B300CA3E1F /* cache */ = {
 			isa = PBXGroup;
 			children = (
-				60D9BE822139607900FE24A1 /* FileBackedFlagCacheRepository.swift */,
+				60D9BE822139607900FE24A1 /* URLJSONFlagRepository.swift */,
 				60D9BE8E2139611B00FE24A1 /* InMemoryFlagRepository.swift */,
-				602357DC213EDB6000E61BF8 /* FileSystem.swift */,
-				602357DE213EDC1800E61BF8 /* FileManagerFileSystem.swift */,
 			);
 			path = cache;
 			sourceTree = "<group>";
@@ -346,13 +343,11 @@
 				60D9BE852139609400FE24A1 /* FlagRepository.swift in Sources */,
 				60D9BE8F2139611B00FE24A1 /* InMemoryFlagRepository.swift in Sources */,
 				60E9E338213D384E00CA3E1F /* DefaultFlagURLRequestBuilder.swift in Sources */,
-				602357DD213EDB6000E61BF8 /* FileSystem.swift in Sources */,
 				60E9E332213D207000CA3E1F /* FlagURLRequestBuilder.swift in Sources */,
 				60E9E330213D205900CA3E1F /* FlagURLResponseTransformer.swift in Sources */,
 				60E9E33A213D38C900CA3E1F /* FlagURLBuilder.swift in Sources */,
-				602357DF213EDC1800E61BF8 /* FileManagerFileSystem.swift in Sources */,
 				60D9BE87213960AD00FE24A1 /* WriteableFlagRepository.swift in Sources */,
-				60D9BE832139607900FE24A1 /* FileBackedFlagCacheRepository.swift in Sources */,
+				60D9BE832139607900FE24A1 /* URLJSONFlagRepository.swift in Sources */,
 				60E9E33C213D392600CA3E1F /* URLPathFlagURLBuilder.swift in Sources */,
 				60D9BE912139613300FE24A1 /* RemoteFlagRepository.swift in Sources */,
 				60E9E32E213D204200CA3E1F /* StatusCodeFlagURLResponseTransformer.swift in Sources */,
@@ -361,6 +356,7 @@
 				60D9BE8D2139610A00FE24A1 /* DefaultFlagRepository.swift in Sources */,
 				60D9BE812137037B00FE24A1 /* Flag.swift in Sources */,
 				60D9BE8B213960F200FE24A1 /* StaticContext.swift in Sources */,
+				604D55262165561E00BD4058 /* Coding.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

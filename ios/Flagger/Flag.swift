@@ -14,4 +14,11 @@ protocol Identifiable {
     
 }
 
-//protocol 
+enum Toggle {
+    case on, off
+}
+
+protocol Toggleable {
+    
+    var toggle: Toggle { get }
+}
