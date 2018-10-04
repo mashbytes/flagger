@@ -14,15 +14,6 @@ protocol Identifiable {
     
 }
 
-enum Toggle {
-    case on, off
-}
-
-protocol Toggleable {
-    
-    var toggle: Toggle { get }
-}
-
 protocol HTTPStatusCodeDecodable {
     
     init(from code: Int)
